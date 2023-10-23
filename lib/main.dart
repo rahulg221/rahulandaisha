@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rahulandaisha/home.dart';
 
+Color primary = Color.fromARGB(255, 195, 143, 255);
+Color secondary = Color.fromARGB(255, 255, 206, 251);
+Color button = Color.fromARGB(255, 245, 88, 70);
+Color textColor = Colors.white.withOpacity(0.9);
 void main() {
   runApp(const MyApp());
 }
@@ -11,23 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Rahul and Aisha',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -55,71 +45,174 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String password = '';
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void homePage(String password) {
+    if (password == 'r') {
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
+          transitionDuration: Duration(milliseconds: 1000), // adjust as needed
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            // Heartbeat animation
+            var curve = Curves.easeInOut;
+            var pulseTween = Tween<double>(begin: 0.95, end: 1.0)
+                .chain(CurveTween(curve: curve));
+            var pulseAnimation = animation.drive(pulseTween);
+
+            // Fade animation
+            var fadeTween = Tween<double>(begin: 0.0, end: 1.0)
+                .chain(CurveTween(curve: curve));
+            var fadeAnimation = animation.drive(fadeTween);
+
+            return ScaleTransition(
+              scale: pulseAnimation,
+              child: FadeTransition(
+                opacity: fadeAnimation,
+                child: child,
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      final snackBar = SnackBar(
+        content: Text('Wrong password'),
+        backgroundColor: primary,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          bool isLargeScreen = constraints.maxWidth > 800;
+
+          double containerWidth = isLargeScreen ? width * 0.45 : width * 0.8;
+          double containerHeight =
+              isLargeScreen ? height * 0.45 : height * 0.85;
+          double textFieldWidth = isLargeScreen ? width * 0.3 : width * 0.7;
+          double buttonWidth = isLargeScreen ? width * 0.2 : width * 0.5;
+          double buttonHeight = isLargeScreen ? height * 0.06 : height * 0.1;
+
+          return Scaffold(
+            body: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                bool isLargeScreen = constraints.maxWidth > 800;
+
+                double containerWidth =
+                    isLargeScreen ? width * 0.45 : width * 0.8;
+                double containerHeight =
+                    isLargeScreen ? height * 0.4 : height * 0.8;
+                double textFieldWidth =
+                    isLargeScreen ? width * 0.3 : width * 0.7;
+                double buttonWidth = isLargeScreen ? width * 0.2 : width * 0.5;
+                double buttonHeight =
+                    isLargeScreen ? height * 0.06 : height * 0.1;
+
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: width,
+                      color: secondary,
+                    ),
+                    Container(
+                      width: containerWidth,
+                      height: containerHeight,
+                      decoration: BoxDecoration(
+                        color: primary,
+                        borderRadius: BorderRadius.circular(
+                            20), // This makes the corners rounded
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('password',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: textColor,
+                                  fontFamily: 'playpenSans')),
+                          SizedBox(height: height * 0.03),
+                          Container(
+                            width: textFieldWidth,
+                            child: TextField(
+                              obscureText: true,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily:
+                                    'playPenSans', // Set input text color to black
+                              ),
+                              decoration: InputDecoration(
+                                labelText: 'enter your password',
+                                labelStyle: TextStyle(
+                                  color: textColor,
+                                  fontFamily:
+                                      'playpenSans', // Set hint text color to black
+                                ),
+                                fillColor: Colors.white.withOpacity(
+                                    0.2), // Set background color of the text field to white
+                                filled: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 25,
+                                    vertical: 15), // Add some internal padding
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      15), // Very rounded corners
+                                  borderSide: BorderSide.none, // Remove border
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      15), // Very rounded corners when focused
+                                  borderSide:
+                                      BorderSide.none, // Remove focused border
+                                ),
+                              ),
+                              onChanged: (value) {
+                                password = value;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: height * 0.03),
+                          Container(
+                            width: buttonWidth,
+                            height: buttonHeight,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                homePage(password);
+                              },
+                              child: Text(
+                                'submit',
+                                style: TextStyle(
+                                    color: textColor,
+                                    fontFamily: 'playpenSans'),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: button,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 10.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
