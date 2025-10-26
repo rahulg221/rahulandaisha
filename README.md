@@ -1,5 +1,5 @@
 # rahulandaisha
-Digital scrapbook with pictures of my girlfriend and I.
+Digital scrapbook with photos of my girlfriend and I for our 6 month anniversary. 
 
 # Key Features
 Scrapbook - Photos of us organized by month 
