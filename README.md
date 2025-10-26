@@ -1,16 +1,11 @@
 # rahulandaisha
+Digital scrapbook with photos of my girlfriend and I for our 6 month anniversary. 
 
-A new Flutter project.
+# Key Features
+Scrapbook - Photos of us organized by month 
 
-## Getting Started
+Cozy UI - Background Art generated with AI. UI/UX built using Flutter. 
 
-This project is a starting point for a Flutter application.
+# Stack
+Built using Flutter. 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
