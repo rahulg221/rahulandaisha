@@ -7,5 +7,4 @@ Scrapbook - Photos of us organized by month
 Cozy UI - Background Art generated with AI. UI/UX built using Flutter. 
 
 # Stack
-Built using Flutter. 
-
+Built using Flutter. Deployed using Netlify.
